@@ -10,6 +10,8 @@ require 'rubygems'
 require 'mechanize'
 require 'pit'
 
+URL = 'https://tsite.jp'
+
 @login = Pit::get( 'tsite', :require => {
 	'user' => 'your ID of tsite.jp.',
 	'pass' => 'your Password of tsite.jp.'
@@ -18,14 +20,14 @@ require 'pit'
 agent = WWW::Mechanize::new
 agent.set_proxy( *ENV['HTTP_PROXY'].split( /:/ ) ) if ENV['HTTP_PROXY']
 
-agent.get( 'https://tsite.jp' )
+agent.get( URL )
 
 login_form = agent.page.form_with( :action => /login/ )
 login_form.kaiin_no = @login['user']
 login_form.password = @login['pass']
 login_form.click_button
 
-agent.get( 'https://tsite.jp' )
+agent.get( URL )
 puts agent.page.at( 'div#SideMyTpoint strong' ).text
 
 # Local Variables:
