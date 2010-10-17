@@ -23,8 +23,8 @@ agent.set_proxy( *ENV['HTTP_PROXY'].split( /:/ ) ) if ENV['HTTP_PROXY']
 agent.get( URL )
 
 login_form = agent.page.form_with( :action => /login/ )
-login_form.kaiin_no = @login['user']
-login_form.password = @login['pass']
+login_form.LOGIN_ID = @login['user']
+login_form.PASSWORD = @login['pass']
 login_form.click_button
 
 agent.get( URL )
