@@ -17,7 +17,7 @@ URL = 'https://tsite.jp'
 	'pass' => 'your Password of tsite.jp.'
 } )
 
-agent = WWW::Mechanize::new
+agent = Mechanize::new
 agent.set_proxy( *ENV['HTTP_PROXY'].split( /:/ ) ) if ENV['HTTP_PROXY']
 
 agent.get( URL )
