@@ -2,7 +2,7 @@
 #
 # tsite.rb: getting current T-Point by scraping tsite.jp.
 #
-# Copyright (C) 2010 by TADA Tadashi <t@tdtds.jp>
+# Copyright (C) 2011 by TADA Tadashi <t@tdtds.jp>
 # Distributed under GPL.
 #
 
@@ -20,15 +20,16 @@ URL = 'https://tsite.jp'
 agent = Mechanize::new
 agent.set_proxy( *ENV['HTTP_PROXY'].split( /:/ ) ) if ENV['HTTP_PROXY']
 
-agent.get( URL )
+agent.get( URL + '/tm/pc/login/STKIp0001001.do' )
 
-login_form = agent.page.form_with( :action => /login/ )
-login_form.LOGIN_ID = @login['user']
-login_form.PASSWORD = @login['pass']
-login_form.click_button
+agent.page.form_with( :name => 'form1' ) do |form|
+	form.action = URL + '/tm/pc/login/STKIp0001010.do'
+	form['LOGIN_ID'] = @login['user']
+	form['PASSWORD'] = @login['pass']
+	form.click_button
+end
 
-agent.get( URL )
-puts agent.page.at( 'div#SideMyTpoint strong' ).text
+puts agent.page.at( 'strong.SideMyPoint' ).text
 
 # Local Variables:
 # mode: ruby
