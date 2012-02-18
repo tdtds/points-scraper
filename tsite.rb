@@ -29,7 +29,7 @@ agent.page.form_with( :name => 'form1' ) do |form|
 	form.click_button
 end
 
-puts agent.page.at( 'dd.number' ).text
+puts agent.page.at( 'p.point > span.number' ).text
 
 # Local Variables:
 # mode: ruby
