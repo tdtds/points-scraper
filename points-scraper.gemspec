@@ -11,8 +11,6 @@ Gem::Specification.new do |s|
   s.summary     = "getting mileages/points from shopping web sites."
   s.description = "getting mileages/points by web scraping shopping sites: T-SITE."
 
-  s.rubyforge_project = "points-scraper"
-
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
