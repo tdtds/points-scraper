@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.email       = ["t@tdtds.jp"]
   s.homepage    = "https://github.com/tdtds/points-scraper"
   s.summary     = "getting mileages/points from shopping web sites."
-  s.description = "getting mileages/points by web scraping shopping sites: T-SITE."
+  s.description = "getting mileages/points by web scraping shopping sites: T-SITE, ANA and rakuten."
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
