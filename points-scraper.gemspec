@@ -5,8 +5,8 @@ require "points-scraper/version"
 Gem::Specification.new do |s|
   s.name        = "points-scraper"
   s.version     = Points::Scraper::VERSION
-  s.authors     = ["TADA Tadashi"]
-  s.email       = ["t@tdtds.jp"]
+  s.authors     = ["TADA Tadashi", "MATSUI Shinsuke"]
+  s.email       = ["t@tdtds.jp", "poppen.jp@gmal.com"]
   s.homepage    = "https://github.com/tdtds/points-scraper"
   s.summary     = "getting mileages/points from shopping web sites."
   s.description = "getting mileages/points by web scraping shopping sites: T-SITE, ANA and rakuten."
