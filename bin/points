@@ -1,0 +1,42 @@
+#! /usr/bin/env ruby
+# -*- coding: utf-8 -*-
+#
+# points.rb: getting mileages/points from shopping web sites.
+#
+# Copyright (C) 2012 by TADA Tadashi <t@tdtds.jp>
+# Distributed under GPL.
+#
+
+require 'rubygems'
+require 'points-scraper'
+require 'thor'
+require 'pit'
+
+module Points::Scraper
+	class App < Thor
+		desc 'tpoint', 'getting current T-POINT from T-SITE.'
+		def tpoint
+			require 'points-scraper/tpoint'
+			puts TPoint.new( *auth( 'tsite' ) ).start
+		end
+
+	private
+		def auth( key )
+			login = Pit::get( key, :require => {
+				'user' => "your ID of #{key}.",
+				'pass' => "your Password of #{key}."
+			} )
+			[login['user'], login['pass']]
+		end
+	end
+end
+
+Points::Scraper::App.start
+
+# Local Variables:
+# mode: ruby
+# indent-tabs-mode: t
+# tab-width: 3
+# ruby-indent-level: 3
+# End:
+# vim: ts=3
