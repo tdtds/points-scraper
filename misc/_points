@@ -1,4 +1,4 @@
 #compdef points for zsh
 
-_arguments '1:first:(tpoint help)'
+_arguments '1:first:(tpoint ana rakuten help)'
 
