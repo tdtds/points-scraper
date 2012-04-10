@@ -20,6 +20,12 @@ module Points::Scraper
 			puts TPoint.new( *auth( 'tsite' ) ).start
 		end
 
+		desc 'ana', 'getting current ANA Mileage.'
+		def ana
+			require 'points-scraper/anamileage'
+			puts AnaMileage.new( *auth( 'ana' ) ).start
+		end
+
 	private
 		def auth( key )
 			login = Pit::get( key, :require => {
