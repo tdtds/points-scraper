@@ -26,6 +26,12 @@ module Points::Scraper
 			puts AnaMileage.new( *auth( 'ana' ) ).start
 		end
 
+		desc 'rakuten', 'getting current Rakuten Points.'
+		def rakuten
+			require 'points-scraper/rakuten'
+			puts Rakuten.new( *auth( 'rakuten' ) ).start
+		end
+
 		desc 'help', 'show command help.'
 		def help
 			super
