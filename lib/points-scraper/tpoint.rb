@@ -6,30 +6,25 @@
 # Distributed under GPL.
 #
 
-module Points::Scraper
-	class TPoint
-		require 'mechanize'
+require 'points-scraper/default'
 
+module Points::Scraper
+	class TPoint < Default
 		URL = 'https://tsite.jp'
 
-		def initialize( user, pass )
-			@user, @pass = user, pass
-		end
-
 		def start
-			agent = Mechanize::new
-			agent.set_proxy( *ENV['HTTP_PROXY'].split( /:/ ) ) if ENV['HTTP_PROXY']
+			start_scrape do |agent|
+				agent.get( URL + '/tm/pc/login/STKIp0001001.do' )
 
-			agent.get( URL + '/tm/pc/login/STKIp0001001.do' )
+				agent.page.form_with( :name => 'form1' ) do |form|
+					form.action = URL + '/tm/pc/login/STKIp0001010.do'
+					form['LOGIN_ID'] = @user
+					form['PASSWORD'] = @pass
+					form.click_button
+				end
 
-			agent.page.form_with( :name => 'form1' ) do |form|
-				form.action = URL + '/tm/pc/login/STKIp0001010.do'
-				form['LOGIN_ID'] = @user
-				form['PASSWORD'] = @pass
-				form.click_button
+				agent.page.at( 'p.point > span.number' ).text
 			end
-
-			agent.page.at( 'p.point > span.number' ).text
 		end
 	end
 end
