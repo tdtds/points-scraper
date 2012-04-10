@@ -26,6 +26,11 @@ module Points::Scraper
 			puts AnaMileage.new( *auth( 'ana' ) ).start
 		end
 
+		desc 'help', 'show command help.'
+		def help
+			super
+		end
+
 	private
 		def auth( key )
 			login = Pit::get( key, :require => {
