@@ -14,9 +14,6 @@ module Points::Scraper
 
 		def start
 			start_scrape do |agent|
-				agent = Mechanize::new
-				agent.set_proxy( *ENV['HTTP_PROXY'].split( /:/ ) ) if ENV['HTTP_PROXY']
-
 				agent.get(URL)
 
 				agent.page.form_with(:name => 'loginForm') do|form|
