@@ -14,6 +14,8 @@ module Points::Scraper
 
 		def start
 			start_scrape do |agent|
+				agent.open_timeout = 3
+
 				agent.get( URL + '/tm/pc/login/STKIp0001001.do' )
 
 				agent.page.form_with( :name => 'form1' ) do |form|
