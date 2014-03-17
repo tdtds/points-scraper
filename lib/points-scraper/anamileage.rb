@@ -30,7 +30,7 @@ module Points::Scraper
 					form.click_button
 				end
 
-				agent.page.at('//div[@class="mileInfo_a2"]//span[1]').text
+				agent.page.at('ul.point-list a').text.gsub(/,/, '')
 			end
 		end
 	end
