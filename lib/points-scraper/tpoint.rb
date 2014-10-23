@@ -10,22 +10,25 @@ require 'points-scraper/default'
 
 module Points::Scraper
 	class TPoint < Default
-		URL = 'https://tsite.jp'
 
 		def start
 			start_scrape do |agent|
-				agent.open_timeout = 3
+				agent.user_agent = 'Mozilla/5.0 (Linux; U; Android 2.3.2; ja-jp; SonyEricssonSO-01C Build/3.0.D.2.79) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1'
+				agent.get('http://login.yahoo.co.jp/config/login?.lg=jp&.intl=jp&logout=1&.src=www&.done=http://www.yahoo.co.jp')
 
-				agent.get( URL + '/tm/pc/login/STKIp0001001.do' )
-
-				agent.page.form_with( :name => 'form1' ) do |form|
-					form.action = URL + '/tm/pc/login/STKIp0001010.do'
-					form['LOGIN_ID'] = @user
-					form['PASSWORD'] = @pass
+				sleep 2
+				agent.get('https://login.yahoo.co.jp/config/login?.src=www&.done=http://www.yahoo.co.jp')
+				agent.page.form_with(name: 'login_form') do |form|
+					form.field_with(name: 'login').value = @user
+					form.field_with(name: 'passwd').value = @pass
+					agent.page.body =~ /\("\.albatross"\)\[0\]\.value = "(.*)"/
+					form.field_with(name: '.albatross').value = $1
 					form.click_button
 				end
 
-				agent.page.at( 'p.point > span.number' ).text
+				sleep 2
+				agent.get('http://points.yahoo.co.jp/')
+				agent.page.at('.ptsPoint').text
 			end
 		end
 	end
@@ -38,3 +41,4 @@ end
 # ruby-indent-level: 3
 # End:
 # vim: ts=3
+

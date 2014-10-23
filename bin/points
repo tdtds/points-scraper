@@ -16,14 +16,8 @@ module Points::Scraper
 	class App < Thor
 		desc 'tpoint', 'getting current T-POINT from T-SITE.'
 		def tpoint
-			begin
-				require 'points-scraper/tpoint'
-				puts TPoint.new( *auth( 'tsite' ) ).start
-			rescue Net::OpenTimeout
-				$stderr.puts 'T-POINT official site has no response, trying Yahoo! JAPAN.'
-				require 'points-scraper/tpoint-yahoo'
-				puts TPointYahoo.new( *auth( 'yahoo-japan' ) ).start
-			end
+			require 'points-scraper/tpoint'
+			puts TPoint.new( *auth( 'yahoo-japan' ) ).start
 		end
 
 		desc 'ana', 'getting current ANA Mileage.'
