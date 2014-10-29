@@ -15,9 +15,6 @@ module Points::Scraper
 
 		def start
 			start_scrape do |agent|
-				agent = Mechanize::new
-				agent.set_proxy( *ENV['HTTP_PROXY'].split( /:/ ) ) if ENV['HTTP_PROXY']
-
 				page = agent.get(URL)
 
 				login_page = agent.click( page.link_with(:href => /login/i) )
